@@ -1,30 +1,76 @@
+class BasicCalc
+  attr_accessor :num1, :num2, :ops
 
-
-def calculate_bmi height,weight
-  (weight / (height  ** 2)).to_i
-end
-
-def calculate_calories sex, height, weight, age
-  if sex == "Male"
-    bmr = 66.47 + (13.7 * weight) + (5 * height * 100) - (6.8 * age)
-  else
-    bmr = 655.1 + (9.6 * weight) + (1.8 * height * 100) - (4.7 * age)
+  def initialize (num1, num2, ops)
+    @num1 = num1
+    @num2 = num2
+    @ops = ops
   end
-
-  bmr.to_i
 end
 
-# Person one
-person_one_name = "Bob";
-person_one_sex = "Male";
-person_one_age = 50;
-person_one_height = 1.86;
-person_one_weight = 85;
+class Person
+  attr_accessor :name, :sex, :age, :height, :weight
 
-# calculate BMI
-person_one_bmi = calculate_bmi person_one_height, person_one_weight
+  def initialize(name,sex,age,height,weight)
+    @name = name
+    @sex = sex
+    @age = age
+    @height = height
+    @weight = weight
 
-# calculate required calories
-person_one_calories = calculate_calories(person_one_sex, person_one_height, person_one_weight, person_one_age)
+    def calories
+      if sex == "Male"
+        bmr = 66.47 + (13.7 * weight) + (5 * height * 100) - (6.8 * age)
+      else
+        bmr = 655.1 + (9.6 * weight) + (1.8 * height * 100) - (4.7 * age)
+      end
+      bmr.to_i
+    end
 
-puts "#{person_one_name} has a BMI of #{person_one_bmi}. Recommend calorie intake is #{person_one_calories} calories"
+    def bmi
+      (weight / (height ** 2)).to_i
+    end
+
+    def testing_initializers
+      puts @name
+      puts @sex
+      puts @age
+      puts @height
+      puts @weight
+    end
+  end
+end
+
+def loop_function
+    puts "What's your name?"
+    @name_loop = gets.chomp
+    puts "What's your sex?"
+    @sex_loop = gets.chomp
+    puts "What's your age?"
+    @age_loop = gets.to_f
+    puts "What's your height in m?"
+    @height_loop = gets.to_f
+    puts "What's your weight in kg?"
+    @weight_loop = gets.to_f
+end
+
+
+mani = Person.new("Mani", "male", 29, 1.78, 60)
+
+begin
+  puts "What's your name?"
+  @name_loop = gets.chomp
+  puts "What's your sex?"
+  @sex_loop = gets.chomp
+  puts "What's your age?"
+  @age_loop = gets.to_f
+  puts "What's your height in m?"
+  @height_loop = gets.to_f
+  puts "What's your weight in kg?"
+  @weight_loop = gets.to_f
+  tester = Person.new("#{@name_loop}","#{@sex_loop}", @age_loop, @height_loop, @weight_loop)
+
+  puts "#{tester.name} has a BMI of #{tester.bmi}. Recommend calorie intake is #{tester.calories} calories"
+  puts "Would you like another calculation [y] or exit [x]"
+  user = gets.chomp
+end until user == 'x'
